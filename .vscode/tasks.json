@@ -6,7 +6,7 @@
     {
       "label": "compile readme.md",
       "type": "shell",
-      "command": "node_modules\\.bin\\generate-md --layout github --input README.md --output ./docs",
+      "command": "node_modules\\.bin\\generate-md --layout github --input ${file} --output ./docs",
       "presentation": {
         "echo": true,
         "reveal": "never",
