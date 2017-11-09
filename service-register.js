@@ -12,7 +12,7 @@ const svc = new Service({
   name: SERVICE_NAME,
   description: 'Web Proxy for HTTP(s) through the system proxy.',
   script: path.resolve(__dirname, 'lib/proxy.js'),
-  abortOnError: true,
+  abortOnError: false,
   logpath: SERVER_LOG_DIR,
   env: [{
     name: 'DEBUG',

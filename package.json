@@ -15,6 +15,10 @@
   "bin": {
     "web-proxy": "./bin/web-proxy.cmd"
   },
+  "repository": {
+    "type": "github",
+    "url": "https://github.com/stuartZhang/node-web-proxy"
+  },
   "dependencies": {
     "argparse": "^1.0.9",
     "debug": "^3.1.0",
