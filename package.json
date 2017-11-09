@@ -16,6 +16,7 @@
     "web-proxy": "./bin/web-proxy.cmd"
   },
   "dependencies": {
+    "argparse": "^1.0.9",
     "debug": "^3.1.0",
     "node-windows": "^0.1.14",
     "socks": "^1.1.10",
