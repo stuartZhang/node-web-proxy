@@ -1,0 +1,24 @@
+{
+  "name": "web-proxy",
+  "version": "1.0.0",
+  "description": "HTTP/HTTPS Proxy through the system proxy",
+  "main": "service-register.js",
+  "scripts": {
+    "start": "node lib/proxy.js -p 7451 --spp 1080"
+  },
+  "keywords": [
+    "https",
+    "proxy"
+  ],
+  "author": "stzhang",
+  "license": "ISC",
+  "bin": {
+    "web-proxy": "./bin/web-proxy.cmd"
+  },
+  "dependencies": {
+    "debug": "^3.1.0",
+    "node-windows": "^0.1.14",
+    "socks": "^1.1.10",
+    "underscore": "^1.8.3"
+  }
+}
