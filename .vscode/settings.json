@@ -1,4 +1,12 @@
 {
+    "debug.inlineValues": true,
+    "explorer.autoReveal": true,
+    "extensions.autoUpdate": true,
+    "window.openFilesInNewWindow": "off",
+    "editor.snippetSuggestions": "top",
     "editor.tabSize": 2,
+    "editor.wordWrap": "on",
+    "editor.tabCompletion": true,
+    "files.defaultLanguage": "javascript",
     "files.trimTrailingWhitespace": true
 }

@@ -3,14 +3,19 @@
   // Hover to view descriptions of existing attributes.
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
-  "configurations": [
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Node.js Launch",
-      "program": "${workspaceRoot}\\lib\\proxy.js",
-      "args": ["-p", "7451", "--spp", "1080"],
-      "cwd": "${workspaceRoot}"
-    }
-  ]
+  "configurations": [{
+    "type": "node",
+    "request": "launch",
+    "name": "Forward-Proxy",
+    "program": "${workspaceRoot}\\lib\\proxy.js",
+    "args": ["--service-install"],
+    "cwd": "${workspaceRoot}"
+  }, {
+    "type": "node",
+    "request": "launch",
+    "name": "Win-Service",
+    "program": "${workspaceRoot}\\service-register.js",
+    "args": ["-p", "7451", "--spp", "1080"],
+    "cwd": "${workspaceRoot}"
+  }]
 }
