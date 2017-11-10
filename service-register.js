@@ -1,3 +1,4 @@
+require('promise-tap').mix(Promise.prototype);
 const {ArgumentParser} = require('argparse');
 const {build} = require('./lib/buildWinService');
 const parser = new ArgumentParser({
@@ -30,6 +31,11 @@ parser.addArgument([ '-sr', '--service-restart' ], {
   dest: 'serviceRestart',
   help: 'Restart the system-service HTTP(S) Proxy'
 });
+parser.addArgument([ '-t', '-trace' ], {
+  action: 'storeTrue',
+  dest: 'trace',
+  help: 'Trace the proxy logs'
+});
 parser.addArgument([ '-p', '--port' ], {
   action: 'store',
   defaultValue: process.env.PORT || 5555,
@@ -44,19 +50,16 @@ parser.addArgument([ '-spp', '--system-proxy-port' ], {
   type: 'int'
 });
 const cliArgs = parser.parseArgs();
-if (cliArgs.serviceStop) {
-  build(cliArgs.port, cliArgs.sysProxyPort).stop();
-} else if (cliArgs.serviceStart) {
-  build(cliArgs.port, cliArgs.sysProxyPort).start();
-} else if (cliArgs.serviceRestart) {
-  const svc = build(cliArgs.port, cliArgs.sysProxyPort);
-  svc.stop();
-  svc.start();
-} else if (cliArgs.serviceInstall) {
-  build(cliArgs.port, cliArgs.sysProxyPort).install();
-} else if (cliArgs.serviceUninstall) {
-  build(cliArgs.port, cliArgs.sysProxyPort).uninstall();
-} else {
+if (cliArgs.serviceStop) { // Stop the Forward Proxy service
+  build(cliArgs.port, cliArgs.sysProxyPort).tap(svc => svc.stop());
+} else if (cliArgs.serviceStart) { // Start the Forward Proxy service
+  build(cliArgs.port, cliArgs.sysProxyPort).tap(svc => svc.start());
+} else if (cliArgs.serviceRestart) { // Restart the Forward Proxy service
+  build(cliArgs.port, cliArgs.sysProxyPort).tap(svc => svc.stop()).tap(svc => svc.start());
+} else if (cliArgs.serviceInstall) { // Install the Forward Proxy service
+  build(cliArgs.port, cliArgs.sysProxyPort).tap(svc => svc.install());
+} else if (cliArgs.serviceUninstall) { // Uninstall the Forward Proxy service
+  build(cliArgs.port, cliArgs.sysProxyPort).tap(svc => svc.uninstall());
+} else { // Print out the usage.
   parser.printHelp();
-  parser.printUsage();
 }

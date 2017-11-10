@@ -15,7 +15,7 @@
     "request": "launch",
     "name": "Win-Service",
     "program": "${workspaceRoot}\\service-register.js",
-    "args": ["-p", "7451", "--spp", "1080"],
+    "args": ["-p", "7451", "-spp", "1080"],
     "cwd": "${workspaceRoot}"
   }]
 }
