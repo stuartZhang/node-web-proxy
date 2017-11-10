@@ -1,6 +1,8 @@
 require('promise-tap').mix(Promise.prototype);
 const {ArgumentParser} = require('argparse');
-const {build} = require('./lib/buildWinService');
+const {build, SERVER_LOG_DIR} = require('./lib/buildWinService');
+const {Tail} = require('tail');
+const path = require('path');
 const parser = new ArgumentParser({
   version: '0.0.1',
   addHelp: true,
@@ -31,7 +33,7 @@ parser.addArgument([ '-sr', '--service-restart' ], {
   dest: 'serviceRestart',
   help: 'Restart the system-service HTTP(S) Proxy'
 });
-parser.addArgument([ '-t', '-trace' ], {
+parser.addArgument([ '-t', '--trace' ], {
   action: 'storeTrue',
   dest: 'trace',
   help: 'Trace the proxy logs'
@@ -60,6 +62,14 @@ if (cliArgs.serviceStop) { // Stop the Forward Proxy service
   build(cliArgs.port, cliArgs.sysProxyPort).tap(svc => svc.install());
 } else if (cliArgs.serviceUninstall) { // Uninstall the Forward Proxy service
   build(cliArgs.port, cliArgs.sysProxyPort).tap(svc => svc.uninstall());
+} else if (cliArgs.trace) { // Uninstall the Forward Proxy service
+  const tail = new Tail(path.resolve(SERVER_LOG_DIR, 'httpsproxy.err.log'), {useWatchFile: true});
+  tail.on("line", function(data) {
+    console.log(data);
+  }).on("error", function(error) {
+    console.error(error);
+  });
+  tail.watch();
 } else { // Print out the usage.
   parser.printHelp();
 }
