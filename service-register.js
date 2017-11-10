@@ -35,7 +35,6 @@ parser.addArgument([ '-sr', '--service-restart' ], {
 });
 parser.addArgument([ '-t', '--trace' ], {
   action: 'storeTrue',
-  dest: 'trace',
   help: 'Trace the proxy logs'
 });
 parser.addArgument([ '-p', '--port' ], {
