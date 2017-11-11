@@ -8,7 +8,7 @@
     "request": "launch",
     "name": "Forward-Proxy",
     "program": "${workspaceRoot}\\lib\\proxy.js",
-    "args": ["--service-install"],
+    "args": ["--p", "7451"],
     "cwd": "${workspaceRoot}"
   }, {
     "type": "node",
