@@ -58,7 +58,7 @@ const server = http.createServer(function(userRequest, userResponse){
 server.addListener("connect", (request, socketRequest, bodyhead) => { // HTTPS connect listener
   const {url, client:{remoteAddress}} = request;
   const hostport = getHostPortFromString(url, 443);
-  const proxyType = FindProxyForURL(url, hostport[0]);
+  const proxyType = FindProxyForURL(`https://${url}`, hostport[0]);
   if (proxyType === PROXY && guestWhiteList.has(remoteAddress)) { // paid
     httpsProxy(gLogger, SYSTEM_PROXY, request, socketRequest, bodyhead)
       .catch(err => gLogger.error('https proxy -', err));
