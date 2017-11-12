@@ -1,9 +1,8 @@
 const http = require("http");
-const debug = require('debug');
 const _ = require('underscore');
 
 const {buildMatcher, findProxyForURL, PROXY} = require('./lib/pac');
-const {buildProxyCliArgs, getHostPortFromString, jsonLoad} = require('./lib/utils');
+const {buildProxyCliArgs, getHostPortFromString, jsonLoad, debug} = require('./lib/utils');
 const httpsProxy = require('./lib/https-sys-proxy');
 const httpsDirect = require('./lib/https-direct');
 const httpUserRequest = require('./lib/http-both');

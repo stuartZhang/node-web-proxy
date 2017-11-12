@@ -13,6 +13,13 @@
   }, {
     "type": "node",
     "request": "launch",
+    "name": "Forward-Proxy-Cluster",
+    "program": "${workspaceRoot}\\forward-proxy-cluster.js",
+    "args": ["--p", "7451"],
+    "cwd": "${workspaceRoot}"
+  }, {
+    "type": "node",
+    "request": "launch",
     "name": "Win-Service",
     "program": "${workspaceRoot}\\service-register.js",
     "args": ["-p", "7451", "-spp", "1080"],
