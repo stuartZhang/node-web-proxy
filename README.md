@@ -9,7 +9,7 @@ A HTTP(S) Forward Proxy Cluster built upon nodejs
 
 此外，因为我们既不在YouTube上看视频，也不向Google Drive上传或下载大文件，相反，每天仅只刷刷技术文章的网页（还得减去 读技术文章与查字典的时间），一家创业公司，一个月下来，才能使用几个G的流量呀！
 
-所以，这个开源项目应运而生，瞬间将一款**单连接**VPN付费服务 变成 一款 **多连接**VPN服务。
+所以，这个开源项目应运而生，瞬间将一款**单连接**VPN付费服务 变成 一款 **多连接**VPN服务。相对于市面上的Apache与Nginx正向代理module，HTTP(S) Forward Proxy Cluster能够完美地处理HTTPS的请求。
 # Requirements
 1. nodejs v8.x+
 1. If it's expected to register the HTTP(S) Forward Proxy Cluster as a system service, Windows 7+ is imperative.
