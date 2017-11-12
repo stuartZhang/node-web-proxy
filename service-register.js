@@ -50,17 +50,33 @@ parser.addArgument([ '-spp', '--system-proxy-port' ], {
   help: 'The port number of the system proxy underlying the HTTP(S) Forward Proxy. (Default: 1080)',
   type: 'int'
 });
+parser.addArgument([ '-gwl', '--guest-whitelist' ], {
+  action: 'store',
+  defaultValue: process.env.GUEST_WHITELIST || path.resolve(__dirname, './config/guest-whitelist.json'),
+  dest: 'gwlFilePath',
+  help: 'Only the clients enjoy the paid forward proxy whose ips are in the whitelist file.',
+  type: 'string'
+});
+parser.addArgument([ '-pr', '--pac-rules' ], {
+  action: 'store',
+  defaultValue: process.env.PAC_RULES || path.resolve(__dirname, './config/pac-rules.json'),
+  dest: 'prFilePath',
+  help: 'Only the web sites the paid forward proxy whose ips are in the whitelist file.',
+  type: 'string'
+});
 const cliArgs = parser.parseArgs();
+const {port, sysProxyPort, gwlFilePath, prFilePath} = cliArgs;
+
 if (cliArgs.serviceStop) { // Stop the Forward Proxy service
-  build(cliArgs.port, cliArgs.sysProxyPort).tap(svc => svc.stop());
+  build(port, sysProxyPort, gwlFilePath, prFilePath).tap(svc => svc.stop());
 } else if (cliArgs.serviceStart) { // Start the Forward Proxy service
-  build(cliArgs.port, cliArgs.sysProxyPort).tap(svc => svc.start());
+  build(port, sysProxyPort, gwlFilePath, prFilePath).tap(svc => svc.start());
 } else if (cliArgs.serviceRestart) { // Restart the Forward Proxy service
-  build(cliArgs.port, cliArgs.sysProxyPort).tap(svc => svc.stop()).tap(svc => svc.start());
+  build(port, sysProxyPort, gwlFilePath, prFilePath).tap(svc => svc.stop()).tap(svc => svc.start());
 } else if (cliArgs.serviceInstall) { // Install the Forward Proxy service
-  build(cliArgs.port, cliArgs.sysProxyPort).tap(svc => svc.install());
+  build(port, sysProxyPort, gwlFilePath, prFilePath).tap(svc => svc.install());
 } else if (cliArgs.serviceUninstall) { // Uninstall the Forward Proxy service
-  build(cliArgs.port, cliArgs.sysProxyPort).tap(svc => svc.uninstall());
+  build(port, sysProxyPort, gwlFilePath, prFilePath).tap(svc => svc.uninstall());
 } else if (cliArgs.trace) { // Uninstall the Forward Proxy service
   const tail = new Tail(path.resolve(SERVER_LOG_DIR, 'httpsproxy.err.log'), {useWatchFile: true});
   tail.on("line", function(data) {

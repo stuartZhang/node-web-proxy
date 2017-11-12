@@ -11,7 +11,7 @@ const httpsDirect = require('./lib/https-direct');
 const httpUserRequest = require('./lib/http-both');
 
 if (_.isEmpty(process.env.DEBUG)) {
-  process.env.DEBUG = 'error,*-error';
+  process.env.DEBUG = 'proxy-init,error,*-error';
 }
 process.on('unhandledRejection', (reason, p) => {
   gLogger.error('Unhandled Rejection at:', p, 'reason:', reason);
@@ -40,6 +40,20 @@ parser.addArgument([ '-spp', '--system-proxy-port' ], {
   help: 'The port number of the system proxy underlying the HTTP(S) Forward Proxy. (Default: 1080)',
   type: 'int'
 });
+parser.addArgument([ '-gwl', '--guest-whitelist' ], {
+  action: 'store',
+  defaultValue: process.env.GUEST_WHITELIST || path.resolve(__dirname, './config/guest-whitelist.json'),
+  dest: 'gwlFilePath',
+  help: 'Only the clients enjoy the paid forward proxy whose ips are in the whitelist file.',
+  type: 'string'
+});
+parser.addArgument([ '-pr', '--pac-rules' ], {
+  action: 'store',
+  defaultValue: process.env.PAC_RULES || path.resolve(__dirname, './config/pac-rules.json'),
+  dest: 'prFilePath',
+  help: 'Only the web sites the paid forward proxy whose ips are in the whitelist file.',
+  type: 'string'
+});
 const cliArgs = parser.parseArgs();
 const SYSTEM_PROXY = {
   ipaddress: "localhost", // Random public proxy
@@ -48,10 +62,11 @@ const SYSTEM_PROXY = {
   command: 'connect'  // This defaults to connect, so it's optional if you're not using BIND or Associate.
 };
 gLogger.init(`forward proxy listening on port ${cliArgs.port}`);
-gLogger.init(`system proxy on port ${cliArgs.sysProxyPort}`);
-console.log('system proxy config:', SYSTEM_PROXY);
-const gwlPromise = jsonLoad(path.resolve(__dirname, './config/guest-whitelist.json'));
-const matcherPromise = buildMatcher(path.resolve(__dirname, './config/pac-rules.json'));
+gLogger.init(`system proxy is expected on port ${cliArgs.sysProxyPort}`);
+gLogger.init(`guest-whitelist file is ${cliArgs.gwlFilePath}`);
+gLogger.init(`pac-rules file is ${cliArgs.prFilePath}`);
+const gwlPromise = jsonLoad(cliArgs.gwlFilePath);
+const matcherPromise = buildMatcher(cliArgs.prFilePath);
 // start HTTP server with custom request handler callback function
 const server = http.createServer(async (userRequest, userResponse) => { // handle a HTTP proxy request
   const {url, client:{remoteAddress}} = userRequest;
