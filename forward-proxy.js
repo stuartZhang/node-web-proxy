@@ -1,11 +1,9 @@
-const {ArgumentParser} = require('argparse');
-const path = require('path');
 const http = require("http");
 const debug = require('debug');
 const _ = require('underscore');
 
 const {buildMatcher, findProxyForURL, PROXY} = require('./lib/pac');
-const {getHostPortFromString, jsonLoad} = require('./lib/utils');
+const {buildProxyCliArgs, getHostPortFromString, jsonLoad} = require('./lib/utils');
 const httpsProxy = require('./lib/https-sys-proxy');
 const httpsDirect = require('./lib/https-direct');
 const httpUserRequest = require('./lib/http-both');
@@ -22,39 +20,7 @@ const gLogger = {
   guest: debug('guest'),
   error: debug('error')
 };
-const parser = new ArgumentParser({
-  version: '0.0.1',
-  addHelp: true,
-  description: 'A HTTP(S) Forward Proxy built upon nodejs'
-});
-parser.addArgument([ '-p', '--port' ], {
-  action: 'store',
-  defaultValue: process.env.PORT || 5555,
-  help: 'The port on which the HTTP(S) Proxy to listens. (Default: 5555)',
-  type: 'int'
-});
-parser.addArgument([ '-spp', '--system-proxy-port' ], {
-  action: 'store',
-  defaultValue: process.env.SYSTEM_PROXY_PORT || 1080,
-  dest: 'sysProxyPort',
-  help: 'The port number of the system proxy underlying the HTTP(S) Forward Proxy. (Default: 1080)',
-  type: 'int'
-});
-parser.addArgument([ '-gwl', '--guest-whitelist' ], {
-  action: 'store',
-  defaultValue: process.env.GUEST_WHITELIST || path.resolve(__dirname, './config/guest-whitelist.json'),
-  dest: 'gwlFilePath',
-  help: 'Only the clients enjoy the paid forward proxy whose ips are in the whitelist file.',
-  type: 'string'
-});
-parser.addArgument([ '-pr', '--pac-rules' ], {
-  action: 'store',
-  defaultValue: process.env.PAC_RULES || path.resolve(__dirname, './config/pac-rules.json'),
-  dest: 'prFilePath',
-  help: 'Only the web sites the paid forward proxy whose ips are in the whitelist file.',
-  type: 'string'
-});
-const cliArgs = parser.parseArgs();
+const cliArgs = buildProxyCliArgs();
 const SYSTEM_PROXY = {
   ipaddress: "localhost", // Random public proxy
   port: cliArgs.sysProxyPort,
