@@ -25,6 +25,7 @@
     "node-windows": "^0.1.14",
     "promise-tap": "0.0.3",
     "socks": "^1.1.10",
+    "strip-json-comments": "^2.0.1",
     "tail": "^1.2.3",
     "underscore": "^1.8.3"
   },

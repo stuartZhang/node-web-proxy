@@ -1,11 +1,11 @@
 const {ArgumentParser} = require('argparse');
+const path = require('path');
 const http = require("http");
 const debug = require('debug');
 const _ = require('underscore');
 
-const {FindProxyForURL, PROXY} = require('./lib/pac');
-const {getHostPortFromString} = require('./lib/utils');
-const guestWhiteList = require('./config/guest-whitelist');
+const {findProxyForURL, PROXY} = require('./lib/pac');
+const {getHostPortFromString, jsonLoad} = require('./lib/utils');
 const httpsProxy = require('./lib/https-sys-proxy');
 const httpsDirect = require('./lib/https-direct');
 const httpUserRequest = require('./lib/http-both');
@@ -43,27 +43,34 @@ const SYSTEM_PROXY = {
 };
 gLogger.init(`forward proxy listening on port ${cliArgs.port}`);
 gLogger.init(`system proxy on port ${cliArgs.sysProxyPort}`);
+console.log('system proxy config:', SYSTEM_PROXY);
+const gwlPromise = jsonLoad(path.resolve(__dirname, './config/guest-whitelist.json'));
 // start HTTP server with custom request handler callback function
-const server = http.createServer(function(userRequest, userResponse){
+const server = http.createServer(async (userRequest, userResponse) => { // handle a HTTP proxy request
   const {url, client:{remoteAddress}} = userRequest;
   const hostport = getHostPortFromString(url, 443);
-  const proxyType = FindProxyForURL(url, hostport[0]);
+  const [proxyType, guestWhiteList] = await Promise.all([
+    findProxyForURL(url, hostport[0]),
+    gwlPromise
+  ])
   let sysProxy;
-  if (proxyType === PROXY && guestWhiteList.has(remoteAddress)) { // paid
+  if (proxyType === PROXY && guestWhiteList.includes(remoteAddress)) { // paid
     sysProxy = SYSTEM_PROXY;
   } // free
   httpUserRequest(gLogger, sysProxy, userRequest, userResponse);
 }).listen(cliArgs.port);
 // add handler for HTTPS (which issues a CONNECT to the proxy)
-server.addListener("connect", (request, socketRequest, bodyhead) => { // HTTPS connect listener
+server.addListener("connect", async (request, socketRequest, bodyhead) => { // HTTPS connect listener
   const {url, client:{remoteAddress}} = request;
   const hostport = getHostPortFromString(url, 443);
-  const proxyType = FindProxyForURL(`https://${url}`, hostport[0]);
-  if (proxyType === PROXY && guestWhiteList.has(remoteAddress)) { // paid
+  const [proxyType, guestWhiteList] = await Promise.all([
+    findProxyForURL(`https://${url}`, hostport[0]),
+    gwlPromise
+  ]);
+  if (proxyType === PROXY && guestWhiteList.includes(remoteAddress)) { // paid
     httpsProxy(gLogger, SYSTEM_PROXY, request, socketRequest, bodyhead)
       .catch(err => gLogger.error('https proxy -', err));
   } else { // free
     httpsDirect(gLogger, request, socketRequest, bodyhead);
   }
 });
-console.log('system proxy config:', SYSTEM_PROXY);
