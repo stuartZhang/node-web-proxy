@@ -5,17 +5,25 @@ A HTTP(S) Forward Proxy Cluster built upon nodejs
 
 > 购买了一款3G流量的**单连接**VPN服务。但是，一方面，贪婪地期望：自己的手机、平板电脑、Linux开发机、甚至老爸的台机都能*同时*享受VPN服务；另一方面，又对 **多连接**VPN服务的 翻番价格 与 流量浪费 心有不干。
 
-甚至，即使作为一家新兴科技公司的老板，为了让自己的软件开发者能够使用Google更快地搜索到最匹配的技术资源，你又是否舍得按人头给每一位开发者分别购买VPN连接呢？如果一款《个人版 单连接 VPN付费服务》能够在公司内多员工共享共享使用，那企不是完美了？
+甚至，即使作为一家新兴科技公司的老板，为了让自己的软件开发者能够使用Google更快地搜索到最匹配的技术资源，你又是否舍得按人头给每一位开发者分别购买VPN连接呢？如果一款《个人版 单连接 VPN付费服务》能够在公司内由多位员工共享使用，那企不是完美了？
 
 此外，因为我们既不在YouTube上看视频，也不向Google Drive上传或下载大文件，相反，每天仅只刷刷技术文章的网页（还得减去 读技术文章与查字典的时间），一家创业公司，一个月下来，才能使用几个G的流量呀！
 
-所以，这个开源项目应运而生，瞬间将一款**单连接**VPN付费服务 变成 一款 **多连接**VPN服务。相对于市面上的Apache与Nginx正向代理module，HTTP(S) Forward Proxy Cluster能够完美地处理HTTPS的请求。
+所以，这个开源项目应运而生，瞬间将一款**单连接**VPN付费服务 变成 一款 **多连接**VPN服务。
 # Requirements
 1. nodejs v8.x+
 1. If it's expected to register the HTTP(S) Forward Proxy Cluster as a system service, Windows 7+ is imperative.
 1. If it's acceptable to start up the HTTP(S) Forward Proxy Cluster in CLI, the Linux is good as well.
 1. A VPN client (e.g. [Shadowsocks](https://github.com/shadowsocks/shadowsocks-windows)) has been installed in your machine.
 1. You must be aware of the port number of the VPN client. As for [Shadowsocks](https://github.com/shadowsocks/shadowsocks-windows), it's *1080* by default.
+
+# Characteristics
+1. In contrast with the Apache/Nginx Proxy module, the HTTP(S) Forward Proxy Cluster is capable of propagating the HTTPS requests.
+1. The whitelist of the Client IP addresses. Only the enrolled guests are able to enjoy the paid part of the HTTP(S) Forward Proxy Cluster. Conversely, the remaining requests originating from the other tourists are directly delivered to their target web sites and deliberately bypass the VPN pipe.
+    * Reference configuration file: ./config/guest-whitelist.json
+1. [GFWlist](https://adblockplus.org/en/filter-cheatsheet) filter rules. Only the HTTP(S) requests against the inaccessible web sites actually pass through the VPN pipe, for the sake of the network-flow economy.
+    * Reference configuration file: ./config/pac-rules.json
+
 # Components
 The HTTP(S) Forward Proxy is composed of THREE core JS files.
 1. service-register.js
@@ -24,8 +32,8 @@ The HTTP(S) Forward Proxy is composed of THREE core JS files.
     * Function: Start up a HTTP(S) Forward Proxy Cluster in Linux-Shell/Windows-CMD CLI.
 1. forward-proxy.js
     * Function: Start up a HTTP(S) Forward Proxy in Linux-Shell/Windows-CMD CLI.
-# Usage
 
+# Usage
 Because the project hasn't been still uploaded to NPM, the procedure of its installation is a little tedious.
 
 1. Download the ZIP file.
