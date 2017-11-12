@@ -3,12 +3,12 @@ const http = require("http");
 const debug = require('debug');
 const _ = require('underscore');
 
-const {FindProxyForURL, PROXY} = require('./pac');
-const {getHostPortFromString} = require('./utils');
-const guestWhiteList = require('../config/guest-whitelist');
-const httpsProxy = require('./https-sys-proxy');
-const httpsDirect = require('./https-direct');
-const httpUserRequest = require('./http-both');
+const {FindProxyForURL, PROXY} = require('./lib/pac');
+const {getHostPortFromString} = require('./lib/utils');
+const guestWhiteList = require('./config/guest-whitelist');
+const httpsProxy = require('./lib/https-sys-proxy');
+const httpsDirect = require('./lib/https-direct');
+const httpUserRequest = require('./lib/http-both');
 
 const gLogger = {
   init: debug('proxy-init'),

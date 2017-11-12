@@ -1,5 +1,5 @@
 # Node.js
 node_modules/
 # node-windows
-lib/daemon/
+daemon/
 service-logs/

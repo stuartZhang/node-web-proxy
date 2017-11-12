@@ -7,7 +7,7 @@
     "type": "node",
     "request": "launch",
     "name": "Forward-Proxy",
-    "program": "${workspaceRoot}\\lib\\proxy.js",
+    "program": "${workspaceRoot}\\forward-proxy.js",
     "args": ["--p", "7451"],
     "cwd": "${workspaceRoot}"
   }, {
