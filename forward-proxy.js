@@ -19,7 +19,7 @@ const gLogger = {
   guest: debug('guest'),
   error: debug('error')
 };
-const cliArgs = buildProxyCliArgs();
+const [cliArgs] = buildProxyCliArgs();
 const SYSTEM_PROXY = {
   ipaddress: "localhost", // Random public proxy
   port: cliArgs.sysProxyPort,

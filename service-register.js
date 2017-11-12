@@ -5,7 +5,7 @@ const path = require('path');
 
 const {buildServiceCliArgs} = require('./lib/utils');
 
-const cliArgs = buildServiceCliArgs();
+const [cliArgs, parser] = buildServiceCliArgs();
 const {port, sysProxyPort, gwlFilePath, prFilePath} = cliArgs;
 
 if (cliArgs.serviceStop) { // Stop the Forward Proxy service
