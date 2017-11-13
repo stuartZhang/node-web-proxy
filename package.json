@@ -1,5 +1,5 @@
 {
-  "name": "node-web-proxy",
+  "name": "node-web-forward-proxy",
   "version": "1.0.0",
   "description": "HTTP/HTTPS Proxy through the system proxy",
   "main": "service-register.js",
