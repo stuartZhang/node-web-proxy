@@ -13,7 +13,10 @@
   "author": "stzhang",
   "license": "ISC",
   "bin": {
-    "web-proxy": "./bin/web-proxy.cmd"
+    "web-proxy": "./bin/web-proxy.cmd",
+    "web-proxy-service": "./bin/web-proxy.cmd",
+    "web-proxy-cluster": "./bin/web-proxy-cluster.cmd",
+    "web-proxy-single": "./bin/web-proxy-single.cmd"
   },
   "repository": {
     "type": "github",
