@@ -14,14 +14,14 @@ A HTTP(S) Forward Proxy Cluster built upon nodejs
 1. nodejs v8.x+
 1. If it's expected to register the HTTP(S) Forward Proxy Cluster as a system service, Windows 7+ is imperative.
 1. If it's acceptable to start up the HTTP(S) Forward Proxy Cluster in CLI, the Linux is good as well.
-1. A VPN client (e.g. [Shadowsocks](https://github.com/shadowsocks/shadowsocks-windows)) has been installed in your machine.
-1. You must be aware of the port number of the VPN client. As for [Shadowsocks](https://github.com/shadowsocks/shadowsocks-windows), it's *1080* by default.
+1. An acceleration client (e.g. [Shadowsocks](https://github.com/shadowsocks/shadowsocks-windows)) has been installed in your machine.
+1. You must be aware of the port number of the acceleration client. As for [Shadowsocks](https://github.com/shadowsocks/shadowsocks-windows), it's *1080* by default.
 
 # Characteristics
 1. In contrast with the Apache/Nginx Proxy module, the HTTP(S) Forward Proxy Cluster is capable of propagating the HTTPS requests.
-1. The whitelist of the Client IP addresses. Only the enrolled guests are able to enjoy the paid part of the HTTP(S) Forward Proxy Cluster. Conversely, the remaining requests originating from the other tourists are directly delivered to their target web sites and deliberately bypass the VPN pipe.
+1. The whitelist of the Client IP addresses. Only the enrolled guests are able to enjoy the paid part of the HTTP(S) Forward Proxy Cluster. Conversely, the remaining requests originating from the other tourists are directly delivered to their target web sites and deliberately bypass the acceleration pipe.
     * Reference configuration file: ./config/guest-whitelist.json
-1. [GFWlist](https://adblockplus.org/en/filter-cheatsheet) filter rules. Only the HTTP(S) requests against the inaccessible web sites actually pass through the VPN pipe, for the sake of the network-flow economy.
+1. [GFWlist](https://adblockplus.org/en/filter-cheatsheet) filter rules. Only the HTTP(S) requests against the inaccessible web sites actually pass through the acceleration pipe, for the sake of the network-flow economy.
     * Reference configuration file: ./config/pac-rules.json
 
 # Components
@@ -47,7 +47,7 @@ Because the project hasn't been still uploaded to NPM, the procedure of its inst
 
 Done. After that,
 1. The HTTP(S) Forward Proxy Cluster is accessible through the URL: http://<*your ip address*>:5555
-1. The VPN client listening on the port 1080 is depended on by the HTTP(S) Forward Proxy Cluster. That's to say, the HTTP(S) Forward Proxy Cluster relays some of requests to the VPN client.
+1. The acceleration client listening on the port 1080 is depended on by the HTTP(S) Forward Proxy Cluster. That's to say, the HTTP(S) Forward Proxy Cluster relays some of requests to the acceleration client.
 1. Last but not least, your web browser must be configured to put the HTTP(S) Forward Proxy Cluster to use by delivering the HTTP Connect command to it. See the snapshot:
 <!--
     ![](./docs/assets/images/instructions1.png) -->
