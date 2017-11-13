@@ -42,17 +42,9 @@ The HTTP(S) Forward Proxy is composed of THREE core JS files.
 # Topologies
    ![](./docs/assets/images/instructions3.png)
 
-# Usage
-Because the project hasn't been still uploaded to NPM, the procedure of its installation is a little tedious.
-
-1. Download the ZIP file.
-1. Decompress it into any folder.
-1. Go to the project-root directory.
-1. Open the CLI/Shell terminal.
-1. Run:
-    1. npm install
-    1. npm link
-    1. web-proxy --service-install
+# Installation
+1. npm -g install node-web-forward-proxy
+1. web-proxy --service-install
 
 Done. After that,
 1. The HTTP(S) Forward Proxy Cluster is visible in the Service panel.
@@ -63,7 +55,7 @@ Done. After that,
 1. The acceleration client listening on the port 1080 is depended on by the HTTP(S) Forward Proxy Cluster. That's to say, the HTTP(S) Forward Proxy Cluster relays some of requests to the acceleration client.
 1. Last but not least, your web browser must be configured to put the HTTP(S) Forward Proxy Cluster to use by delivering the HTTP Connect command to it. See the snapshot:
 <!-- ![](./docs/assets/images/instructions1.png) -->
-# Detail Usage
+# Usage
 ```
 usage: web-proxy-serivce [-h] [-v] [-si] [-su] [-st] [-sp] [-sr] [-t]
                            [-p] [-spp] [-gwl] [-pr]

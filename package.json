@@ -1,17 +1,18 @@
 {
   "name": "node-web-forward-proxy",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "HTTP/HTTPS Proxy through the system proxy",
   "main": "service-register.js",
   "scripts": {
     "start": "node lib/proxy.js -p 7451 --spp 1080"
   },
-  "keywords": [
-    "https",
-    "proxy"
-  ],
-  "author": "stzhang",
+  "keywords": ["https", "forward", "proxy"],
+  "author": "stuart_zhang",
   "license": "ISC",
+  "engines": {
+    "node": ">=8.9.1"
+  },
+  "os": ["win32"],
   "bin": {
     "web-proxy": "./bin/web-proxy.cmd",
     "web-proxy-service": "./bin/web-proxy.cmd",
