@@ -1,6 +1,6 @@
 # node-web-proxy
 A HTTP(S) Forward Proxy Cluster built upon nodejs
-# Motivation
+<!-- # Motivation
 不知作为过客的你，是否正在被困扰于与我相同的付费VPN问题？
 
 > 购买了一款3G流量的**单连接**VPN服务。但是，一方面，贪婪地期望：自己的手机、平板电脑、Linux开发机、甚至老爸的台机都能*同时*享受VPN服务；另一方面，又对 **多连接**VPN服务的 翻番价格 与 流量浪费 心有不干。
@@ -9,7 +9,7 @@ A HTTP(S) Forward Proxy Cluster built upon nodejs
 
 此外，因为我们既不在YouTube上看视频，也不向Google Drive上传或下载大文件，相反，每天仅只刷刷技术文章的网页（还得减去 读技术文章与查字典的时间），一家创业公司，一个月下来，才能使用几个G的流量呀！
 
-所以，这个开源项目应运而生，瞬间将一款**单连接**VPN付费服务 变成 一款 **多连接**VPN服务。
+所以，这个开源项目应运而生，瞬间将一款**单连接**VPN付费服务 变成 一款 **多连接**VPN服务。 -->
 # Requirements
 1. nodejs v8.x+
 1. If it's expected to register the HTTP(S) Forward Proxy Cluster as a system service, Windows 7+ is imperative.
@@ -49,8 +49,8 @@ Done. After that,
 1. The HTTP(S) Forward Proxy Cluster is accessible through the URL: http://<*your ip address*>:5555
 1. The VPN client listening on the port 1080 is depended on by the HTTP(S) Forward Proxy Cluster. That's to say, the HTTP(S) Forward Proxy Cluster relays some of requests to the VPN client.
 1. Last but not least, your web browser must be configured to put the HTTP(S) Forward Proxy Cluster to use by delivering the HTTP Connect command to it. See the snapshot:
-
-    ![](./docs/assets/images/instructions1.png)
+<!--
+    ![](./docs/assets/images/instructions1.png) -->
 # Detail Usage
 ```
 usage: service-register.js [-h] [-v] [-si] [-su] [-st] [-sp] [-sr] [-t]
