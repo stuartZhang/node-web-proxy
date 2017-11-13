@@ -28,10 +28,19 @@ A HTTP(S) Forward Proxy Cluster built upon nodejs
 The HTTP(S) Forward Proxy is composed of THREE core JS files.
 1. service-register.js
     * Function: Register the HTTP(S) Forward Proxy Cluster as a Windows System Service and start it as well. Since then, the HTTP(S) Forward Proxy Cluster will be always automatically launched, once the Windows OS is started.
+    * CLI command: web-proxy or web-proxy-serivce
+    * The JS file is specific to the Windows 7+ OS.
 1. forward-proxy-cluster.js
     * Function: Start up a HTTP(S) Forward Proxy Cluster in Linux-Shell/Windows-CMD CLI.
+    * CLI command: web-proxy-cluster
+    * Support multiple OS platforms.
 1. forward-proxy.js
     * Function: Start up a HTTP(S) Forward Proxy in Linux-Shell/Windows-CMD CLI.
+    * CLI command: web-proxy-single
+    * Support multiple OS platforms.
+
+# Topologies
+   ![](./docs/assets/images/instructions3.png)
 
 # Usage
 Because the project hasn't been still uploaded to NPM, the procedure of its installation is a little tedious.
@@ -46,16 +55,18 @@ Because the project hasn't been still uploaded to NPM, the procedure of its inst
     1. web-proxy --service-install
 
 Done. After that,
+1. The HTTP(S) Forward Proxy Cluster is visible in the Service panel.
+
+    ![](./docs/assets/images/instructions2.png)
+
 1. The HTTP(S) Forward Proxy Cluster is accessible through the URL: http://<*your ip address*>:5555
 1. The acceleration client listening on the port 1080 is depended on by the HTTP(S) Forward Proxy Cluster. That's to say, the HTTP(S) Forward Proxy Cluster relays some of requests to the acceleration client.
 1. Last but not least, your web browser must be configured to put the HTTP(S) Forward Proxy Cluster to use by delivering the HTTP Connect command to it. See the snapshot:
-<!--
-    ![](./docs/assets/images/instructions1.png) -->
+<!-- ![](./docs/assets/images/instructions1.png) -->
 # Detail Usage
 ```
-usage: service-register.js [-h] [-v] [-si] [-su] [-st] [-sp] [-sr] [-t]
+usage: web-proxy-serivce [-h] [-v] [-si] [-su] [-st] [-sp] [-sr] [-t]
                            [-p] [-spp] [-gwl] [-pr]
-
 
 A HTTP(S) Forward Proxy built upon nodejs
 
@@ -91,9 +102,8 @@ Optional arguments:
 ```
 
 ```
-usage: forward-proxy-cluster.js [-h] [-v] [-p] [-spp]
+usage: web-proxy-cluster [-h] [-v] [-p] [-spp]
                                 [-gwl] [-pr]
-
 
 A HTTP(S) Forward Proxy built upon nodejs
 
@@ -117,9 +127,8 @@ Optional arguments:
 ```
 
 ```
-usage: forward-proxy.js [-h] [-v] [-p] [-spp]
+usage: web-proxy-single [-h] [-v] [-p] [-spp]
                         [-gwl] [-pr]
-
 
 A HTTP(S) Forward Proxy built upon nodejs
 
