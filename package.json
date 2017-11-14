@@ -23,6 +23,10 @@
     "type": "github",
     "url": "https://github.com/stuartZhang/node-web-proxy"
   },
+  "bugs": {
+    "url": "https://github.com/stuartZhang/node-web-proxy/issues"
+  },
+  "homepage": "https://github.com/stuartZhang/node-web-proxy#readme",
   "dependencies": {
     "argparse": "^1.0.9",
     "debug": "^3.1.0",
