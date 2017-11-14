@@ -10,7 +10,7 @@
   "author": "stuart_zhang",
   "license": "ISC",
   "engines": {
-    "node": ">=8.9.1"
+    "node": ">=8.9.0"
   },
   "os": ["win32"],
   "bin": {
