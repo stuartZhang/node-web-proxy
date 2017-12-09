@@ -6,13 +6,19 @@
   "scripts": {
     "start": "node lib/proxy.js -p 7451 --spp 1080"
   },
-  "keywords": ["https", "forward", "proxy"],
+  "keywords": [
+    "https",
+    "forward",
+    "proxy"
+  ],
   "author": "stuart_zhang",
   "license": "ISC",
   "engines": {
     "node": ">=8.9.0"
   },
-  "os": ["win32"],
+  "os": [
+    "win32"
+  ],
   "bin": {
     "web-proxy": "./bin/web-proxy.cmd",
     "web-proxy-service": "./bin/web-proxy.cmd",
@@ -38,6 +44,10 @@
     "underscore": "^1.8.3"
   },
   "devDependencies": {
+    "babel-eslint": "^8.0.3",
+    "eslint": "^4.12.1",
+    "eslint-config-amo": "file:../eslint-config-amo",
+    "eslint-plugin-amo": "file:../eslint-plugin-amo",
     "markdown-styles": "^3.1.10"
   }
 }
