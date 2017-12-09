@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 require('promise-tap').mix(Promise.prototype);
 const {build, SERVER_LOG_DIR} = require('./lib/buildWinService');
 const {Tail} = require('tail');
@@ -19,10 +20,10 @@ if (cliArgs.serviceStop) { // Stop the Forward Proxy service
 } else if (cliArgs.serviceUninstall) { // Uninstall the Forward Proxy service
   build(port, sysProxyPort, gwlFilePath, prFilePath).tap(svc => svc.uninstall());
 } else if (cliArgs.trace) { // Uninstall the Forward Proxy service
-  const tail = new Tail(path.resolve(SERVER_LOG_DIR, 'httpsproxy.err.log'), {useWatchFile: true});
-  tail.on("line", function(data) {
+  const tail = new Tail(path.resolve(SERVER_LOG_DIR, 'httpsproxy.err.log'), {'useWatchFile': true});
+  tail.on('line', data => {
     console.log(data);
-  }).on("error", function(error) {
+  }).on('error', error => {
     console.error(error);
   });
   tail.watch();
