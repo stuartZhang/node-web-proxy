@@ -9,7 +9,10 @@
     "name": "Forward-Proxy",
     "program": "${workspaceRoot}\\forward-proxy.js",
     "args": ["-p", "7451"],
-    "cwd": "${workspaceRoot}"
+    "cwd": "${workspaceRoot}",
+    "env": {
+      "DEBUG": "*"
+    }
   }, {
     "type": "node",
     "request": "launch",
