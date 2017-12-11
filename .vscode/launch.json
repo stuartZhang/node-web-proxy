@@ -19,7 +19,10 @@
     "name": "Forward-Proxy-Cluster",
     "program": "${workspaceRoot}\\forward-proxy-cluster.js",
     "args": ["-p", "7451"],
-    "cwd": "${workspaceRoot}"
+    "cwd": "${workspaceRoot}",
+    "env": {
+      "DEBUG": "*"
+    }
   }, {
     "type": "node",
     "request": "launch",
