@@ -8,14 +8,14 @@
     "request": "launch",
     "name": "Forward-Proxy",
     "program": "${workspaceRoot}\\forward-proxy.js",
-    "args": ["--p", "7451"],
+    "args": ["-p", "7451"],
     "cwd": "${workspaceRoot}"
   }, {
     "type": "node",
     "request": "launch",
     "name": "Forward-Proxy-Cluster",
     "program": "${workspaceRoot}\\forward-proxy-cluster.js",
-    "args": ["--p", "7451"],
+    "args": ["-p", "7451"],
     "cwd": "${workspaceRoot}"
   }, {
     "type": "node",
