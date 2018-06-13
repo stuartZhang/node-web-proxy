@@ -16,9 +16,6 @@
   "engines": {
     "node": ">=8.9.0"
   },
-  "os": [
-    "win32"
-  ],
   "bin": {
     "web-proxy": "./bin/web-proxy.cmd",
     "web-proxy-service": "./bin/web-proxy.cmd",
@@ -46,8 +43,8 @@
   "devDependencies": {
     "babel-eslint": "^8.0.3",
     "eslint": "^4.12.1",
-    "eslint-config-amo": "file:../eslint-config-amo",
-    "eslint-plugin-amo": "file:../eslint-plugin-amo",
+    "eslint-config-amo": "0.0.1",
+    "eslint-plugin-amo": "0.0.1",
     "markdown-styles": "^3.1.10"
   }
 }
