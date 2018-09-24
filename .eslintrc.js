@@ -17,13 +17,13 @@ module.exports = {
   },
   'extends': [
     'eslint:recommended',
-    'amo/eslint-config-bestpractice.js',
-    'amo/eslint-config-errors.js',
-    'amo/eslint-config-es6.js',
-    'amo/eslint-config-node.js',
-    'amo/eslint-config-possibleerrors.js',
-    'amo/eslint-config-stylistic.js',
-    'amo/eslint-config-var.js'
+    'stzhang/eslint-config-bestpractice.js',
+    'stzhang/eslint-config-errors.js',
+    'stzhang/eslint-config-es6.js',
+    'stzhang/eslint-config-node.js',
+    'stzhang/eslint-config-possibleerrors.js',
+    'stzhang/eslint-config-stylistic.js',
+    'stzhang/eslint-config-var.js'
   ],
   'parser': 'babel-eslint',
   'root': true
