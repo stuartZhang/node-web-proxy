@@ -2,8 +2,8 @@ const cluster = require('cluster');
 if (cluster.isMaster) {
   const debug = require('debug');
   const gLogger = {
-    'init': debug('cluster-init'),
-    'cluster': debug('cluster')
+    init: debug('cluster-init'),
+    cluster: debug('cluster')
   };
   const os = require('os');
   const {'length': numCPUs} = os.cpus();

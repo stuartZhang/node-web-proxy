@@ -14,17 +14,17 @@ process.on('unhandledRejection', (reason, p) => {
   gLogger.error('Unhandled Rejection at:', p, 'reason:', reason);
 });
 const gLogger = {
-  'init': debug('proxy-init'),
-  'fsock': debug('frontend-socket'),
-  'guest': debug('guest'),
-  'error': debug('error')
+  init: debug('proxy-init'),
+  fsock: debug('frontend-socket'),
+  guest: debug('guest'),
+  error: debug('error')
 };
 const [cliArgs] = buildProxyCliArgs();
 const SYSTEM_PROXY = {
-  'ipaddress': 'localhost', // Random public proxy
-  'port': cliArgs.sysProxyPort,
-  'type': 5, // type is REQUIRED. Valid types: [4, 5]  (note 4 also works for 4a)
-  'command': 'connect' // This defaults to connect, so it's optional if you're not using BIND or Associate.
+  ipaddress: 'localhost', // Random public proxy
+  port: cliArgs.sysProxyPort,
+  type: 5, // type is REQUIRED. Valid types: [4, 5]  (note 4 also works for 4a)
+  command: 'connect' // This defaults to connect, so it's optional if you're not using BIND or Associate.
 };
 gLogger.init(`forward proxy listening on port ${cliArgs.port}`);
 gLogger.init(`system proxy is expected on port ${cliArgs.sysProxyPort}`);

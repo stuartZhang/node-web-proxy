@@ -20,7 +20,7 @@ if (cliArgs.serviceStop) { // Stop the Forward Proxy service
 } else if (cliArgs.serviceUninstall) { // Uninstall the Forward Proxy service
   build(port, sysProxyPort, gwlFilePath, prFilePath).tap(svc => svc.uninstall());
 } else if (cliArgs.trace) { // Uninstall the Forward Proxy service
-  const tail = new Tail(path.resolve(SERVER_LOG_DIR, 'httpsproxy.err.log'), {'useWatchFile': true});
+  const tail = new Tail(path.resolve(SERVER_LOG_DIR, 'httpsproxy.err.log'), {useWatchFile: true});
   tail.on('line', data => {
     console.log(data);
   }).on('error', error => {
